@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f0af3f5-069d-426b-9a93-c6b2fff981b7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cipher.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Cipher.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Result.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BBSApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BBSApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -46,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BBSApplication.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BBSApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BBSApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="113" column="40" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
+            <state relative-caret-position="238">
+              <caret line="119" column="31" lean-forward="true" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlumBlumShub.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BlumBlumShub.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="133" column="47" lean-forward="true" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
+            <state relative-caret-position="254">
+              <caret line="133" column="14" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -429,10 +427,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Result.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java" />
         <option value="$PROJECT_DIR$/src/main/java/entity/Storage.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/BBSApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java" />
       </list>
     </option>
   </component>
@@ -613,13 +611,13 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32995737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39978448" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39978448" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -840,20 +838,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/BBSApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="133" column="47" lean-forward="true" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
+        <state relative-caret-position="238">
+          <caret line="119" column="31" lean-forward="true" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BBSApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/action/BlumBlumShub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="113" column="40" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
+        <state relative-caret-position="254">
+          <caret line="133" column="14" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -117,24 +117,24 @@ public class BlumBlumShub {
     public static List<String> randomText(StringBuffer content) {
 
         SecureRandom r = new SecureRandom();
-        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                ": Generating stock random seed" + System.lineSeparator());
+        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                .append(": Generating stock random seed").append(System.lineSeparator());
         r.nextInt();
 
-        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                ": Generating N" + System.lineSeparator());
+        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                .append(": Generating N").append(System.lineSeparator());
         int bitsize = 64;
         BigInteger nval = BlumBlumShub.generateN(bitsize, r);
 
-        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                ": Generated N = " + nval + System.lineSeparator());
+        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                .append(": Generated N = ").append(nval).append(System.lineSeparator());
         byte[] seed = new byte[bitsize/8];
         r.nextBytes(seed);
 
         BlumBlumShub bbs = new BlumBlumShub(nval, seed);
 
-        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                ": Generating 10 bytes" + System.lineSeparator());
+        content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                .append(": Generating 10 bytes").append(System.lineSeparator());
         List<String> integers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             integers.add(bbs.next(64));

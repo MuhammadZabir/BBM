@@ -8,7 +8,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -146,7 +145,7 @@ public class BBSApplication {
         binaryModifyHdr.setCellValue("Binary Modify Text");
         Cell bitErrHdr = header.createCell(colNum++);
         bitErrHdr.setCellValue("Bit Error");
-        Cell bitErrModifyHdr = header.createCell(colNum++);
+        Cell bitErrModifyHdr = header.createCell(colNum);
         bitErrModifyHdr.setCellValue("Bit Modify Error");
 
         for (Storage storage : storages) {
@@ -166,7 +165,7 @@ public class BBSApplication {
             binaryModify.setCellValue(storage.getBinaryModify());
             Cell bitErr = row.createCell(colNum++);
             bitErr.setCellValue("");
-            Cell bitErrModify = row.createCell(colNum++);
+            Cell bitErrModify = row.createCell(colNum);
             bitErrModify.setCellValue("");
         }
 
