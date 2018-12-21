@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BBSApplication {
@@ -25,78 +26,92 @@ public class BBSApplication {
         StringBuffer content = new StringBuffer();
         List<Storage> storages = new ArrayList<>();
         try {
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Searching the key generator DES" + System.lineSeparator());
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Searching the key generator DES").append(System.lineSeparator());
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Found the key generator" + System.lineSeparator());
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Generating secret key" + System.lineSeparator());
+            KeyGenerator keyGeneratorMod = KeyGenerator.getInstance("DESede");
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Found the key generator").append(System.lineSeparator());
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Generating secret key").append(System.lineSeparator());
             SecretKey myDesKey = keygenerator.generateKey();
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Secret key generated" + System.lineSeparator());
+            SecretKey myDesEdeKey = keyGeneratorMod.generateKey();
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Secret key generated").append(System.lineSeparator());
 
             Cipher encCipher;
             Cipher decCipher;
+            Cipher encCipherMod;
+            Cipher decCipherMod;
 
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Initializing cipher for encryption" + System.lineSeparator());
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Initializing cipher for encryption").append(System.lineSeparator());
             encCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Initializing cipher for decryption" + System.lineSeparator());
+            encCipherMod = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Initializing cipher for decryption").append(System.lineSeparator());
             decCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            decCipherMod = Cipher.getInstance("DESede/ECB/PKCS5Padding");
             encCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Success at creating cipher for encryption" + System.lineSeparator());
+            encCipherMod.init(Cipher.ENCRYPT_MODE, myDesEdeKey);
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Success at creating cipher for encryption").append(System.lineSeparator());
             decCipher.init(Cipher.DECRYPT_MODE, myDesKey);
-            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                    ": Success at creating cipher for decryption" + System.lineSeparator());
+            decCipherMod.init(Cipher.DECRYPT_MODE, myDesEdeKey);
+            content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                    .append(": Success at creating cipher for decryption").append(System.lineSeparator());
 
             for (int x = 0; x < 64; x++) {
                 Storage storage = new Storage();
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Creating random text uses BlumBlumShub" + System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Creating random text uses BlumBlumShub").append(System.lineSeparator());
                 List<String> allInt = BlumBlumShub.randomText(content);
-                StringBuffer randomText = new StringBuffer();
-                allInt.forEach(integer -> randomText.append(integer));
+                StringBuilder randomText = new StringBuilder();
+                allInt.forEach(randomText::append);
                 StringBuffer randomTextBinary = new StringBuffer();
-                allInt.forEach(integer -> randomTextBinary.append(new BigInteger(integer, 16).toString(2) + ","));
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Done creating random text" + System.lineSeparator());
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Random Text = '" + randomText.toString() + "'" + System.lineSeparator());
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Random Text [Binary] = '" + randomTextBinary.toString().replace(",", "") + "'" + System.lineSeparator());
+                allInt.forEach(integer -> randomTextBinary.append(new BigInteger(integer, 16).toString(2))
+                        .append(","));
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Done creating random text").append(System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Random Text = '").append(randomText.toString()).append("'").append(System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Random Text [Binary] = '").append(randomTextBinary.toString().replace(",", "")).append("'").append(System.lineSeparator());
                 byte[] text = randomTextBinary.toString().getBytes();
 
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Encrypting the random text" + System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Encrypting the random text").append(System.lineSeparator());
                 byte[] textEncrypted = encCipher.doFinal(text);
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Encryption success" + System.lineSeparator());
+                byte[] textEncryptedMod = encCipherMod.doFinal(text);
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Encryption success").append(System.lineSeparator());
                 String cipherTextBinary = toBinary(textEncrypted);
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Encrypted = '" + textEncrypted + "'" + System.lineSeparator());
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Encrypted [Binary] = '" + cipherTextBinary + "'" + System.lineSeparator());
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Decrypting the encrypted text" + System.lineSeparator());
+                String cipherTextBinaryMod = toBinary(textEncryptedMod);
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Encrypted = '").append(Arrays.toString(textEncrypted)).append("'").append(System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Encrypted [Binary] = '").append(cipherTextBinary).append("'").append(System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Decrypting the encrypted text").append(System.lineSeparator());
                 byte[] textDecrypted = decCipher.doFinal(textEncrypted);
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Decryption success" + System.lineSeparator());
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Decrypted [Binary] = '" + new String(textDecrypted).replace(",", "") + "'" + System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Decryption success").append(System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Decrypted [Binary] = '").append(new String(textDecrypted).replace(",", ""))
+                        .append("'").append(System.lineSeparator());
                 String[] binaryParts = new String(textDecrypted).split(",");
-                StringBuffer decryptedText = new StringBuffer();
+                StringBuilder decryptedText = new StringBuilder();
                 for (String s : binaryParts) {
                     decryptedText.append(Long.toHexString(Long.parseLong(s, 2)));
                 }
-                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")) +
-                        ": Decrypted = '" + decryptedText.toString() + "'" + System.lineSeparator());
+                content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
+                        .append(": Decrypted = '").append(decryptedText.toString()).append("'").append(System.lineSeparator());
                 storage.setHexaOri(randomText.toString());
                 storage.setBinaryOri(randomTextBinary.toString().replace(",", ""));
                 storage.setCipherOri(textEncrypted.toString());
-                storage.setBinaryCipher(cipherTextBinary.toString());
+                storage.setBinaryCipher(cipherTextBinary);
+                storage.setCipherModify(textEncryptedMod.toString());
+                storage.setBinaryModify(cipherTextBinaryMod);
                 storages.add(storage);
             }
 
@@ -146,9 +161,9 @@ public class BBSApplication {
             Cell binaryCipher = row.createCell(colNum++);
             binaryCipher.setCellValue(storage.getBinaryCipher());
             Cell cipherModify = row.createCell(colNum++);
-            cipherModify.setCellValue("");
+            cipherModify.setCellValue(storage.getCipherModify());
             Cell binaryModify = row.createCell(colNum++);
-            binaryModify.setCellValue("");
+            binaryModify.setCellValue(storage.getBinaryModify());
             Cell bitErr = row.createCell(colNum++);
             bitErr.setCellValue("");
             Cell bitErrModify = row.createCell(colNum++);
