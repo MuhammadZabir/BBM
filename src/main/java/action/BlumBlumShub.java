@@ -134,10 +134,10 @@ public class BlumBlumShub {
         BlumBlumShub bbs = new BlumBlumShub(nval, seed);
 
         content.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")))
-                .append(": Generating 10 bytes").append(System.lineSeparator());
+                .append(": Generating 8 bytes").append(System.lineSeparator());
         List<String> integers = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
-            integers.add(bbs.next(64));
+        for (int i = 0; i < 8; ++i) {
+            integers.add(bbs.next(4));
         }
 
         return integers;
